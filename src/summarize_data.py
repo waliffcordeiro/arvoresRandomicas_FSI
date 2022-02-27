@@ -32,7 +32,6 @@ def summarizeDataset(dataset):
     print('\n')
 
     ax11, ax12, ax21, ax22 = plotSettings()
-    plot.savefig("output2.png")
     # Average Plot
     dataset.describe().loc['mean'].plot.pie(title='Average/Mean', ax = ax11, startangle = 90)
     dataset.describe().loc['mean'].plot.bar(title='Average/Mean', ax = ax21)

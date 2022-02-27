@@ -3,7 +3,7 @@ from sklearn.model_selection import StratifiedKFold as KFold
 import matplotlib.pyplot as plot
 
 from import_data import getData
-from treeTrainData import treeData
+from treeTrainData import treeTraining
 from confusion_matrix import confusionMatrix
 
 
@@ -34,7 +34,7 @@ def treeExecute(tree, x, y, model):
         tree.fit(trainX, trainY)
 
         # Obtendo dados para cada fold e adicionando nas lists
-        aucList, confusionList, legendsList = treeData(tree, testX, testY, numFolds, aucList, confusionList, legendsList, model)
+        aucList, confusionList, legendsList = treeTraining(tree, testX, testY, numFolds, aucList, confusionList, legendsList, model)
     plot.legend(legendsList)
     plot.savefig("../results/{}.png".format(model))
     plot.show()

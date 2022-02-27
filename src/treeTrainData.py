@@ -7,15 +7,18 @@ def treeTraining(tree, xTest, yTest, foldNumber, aucList, confusionList, legends
     # Tree predict
     Ypredict = tree.predict(xTest)
 
+    # Retorna a precisão média nos dados e rótulos de teste fornecidos.
+    Yproba = tree.predict_proba(xTest)[:, 1]
+
     # Matriz de Confusão
     confusionList.append(confusion_matrix(yTest, Ypredict))
 
     # AUC ROC 
-    aucAux = roc_auc_score(yTest, Ypredict)
+    aucAux = roc_auc_score(yTest, Yproba)
     aucList.append(aucAux)
     legendsList.append("Fold {} - AUC: {:.4}".format(foldNumber, aucAux))
     # ROC
-    fpr, tpr, _ = roc_curve(yTest, Ypredict)
+    fpr, tpr, _ = roc_curve(yTest, Yproba)
 
     # Salvando a performance
     featurePerformance = [(featA + featB)/2 for featA, featB in zip(featurePerformance, tree.feature_importances_)]

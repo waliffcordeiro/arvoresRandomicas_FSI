@@ -3,7 +3,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 from import_data import getData
 from summarize_data import summarizeDataset
-from tree_training import treeTraining
+from tree_training import treeExecute
 
 def main():
     dataset = getData()
@@ -19,8 +19,8 @@ def main():
     randomForest = RandomForestClassifier(n_estimators=100)
     
     
-    treeTraining(decisionTree, x, y, "CART")
-    treeTraining(randomForest, x, y, "Random Forest")
+    treeExecute(decisionTree, x, y, "CART")
+    treeExecute(randomForest, x, y, "Random Forest")
     
 
 if __name__ == '__main__':

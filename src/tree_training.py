@@ -7,7 +7,7 @@ from treeTrainData import treeData
 from confusion_matrix import confusionMatrix
 
 
-def treeTraining(tree, x, y, model):
+def treeExecute(tree, x, y, model):
 
     # Inicializando lists
     aucList = []
@@ -52,4 +52,4 @@ if __name__ == '__main__':
 
     # Example
     tree = DecisionTreeClassifier() # Modelo CART
-    treeTraining(tree, x, y, "CART")
+    treeExecute(tree, x, y, "CART")

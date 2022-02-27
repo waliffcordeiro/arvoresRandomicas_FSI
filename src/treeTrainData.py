@@ -2,7 +2,7 @@ import matplotlib.pyplot as plot
 from sklearn.metrics import confusion_matrix, roc_auc_score, roc_curve
 
 # Retorna as listas: AUC score, matrix de confusão de legendas de gráficos
-def treeData(tree, xTest, yTest, foldNumber, aucList, confusionList, legendsList):
+def treeData(tree, xTest, yTest, foldNumber, aucList, confusionList, legendsList, model):
 
     # Tree predict
     Ypredict = tree.predict(xTest)
@@ -19,6 +19,6 @@ def treeData(tree, xTest, yTest, foldNumber, aucList, confusionList, legendsList
 
     # Plot pra cada folder
     plot.plot(fpr, tpr)
-    plot.title('Curva ROC de todos Folds')
+    plot.title('Curva ROC de todos Folds - {}'.format(model))
 
     return (aucList, confusionList, legendsList)

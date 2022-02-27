@@ -5,6 +5,7 @@ from sklearn.metrics import confusion_matrix, roc_auc_score, roc_curve
 def treeTraining(tree, xTest, yTest, foldNumber, aucList, confusionList, legendsList, featurePerformance, model):
 
     # Tree predict
+    # Retorna probabilidades calibradas de classificação de acordo com cada classe em uma matriz de vetores de teste.
     Ypredict = tree.predict(xTest)
 
     # Retorna a precisão média nos dados e rótulos de teste fornecidos.

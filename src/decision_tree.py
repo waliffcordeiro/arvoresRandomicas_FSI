@@ -1,8 +1,11 @@
-from import_data import getData
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import StratifiedKFold as KFold
 import matplotlib.pyplot as plot
+
+from import_data import getData
 from treeTrainData import treeData
+from confusion_matrix import confusionMatrix
+
 
 def decisionTree(dataset):
 
@@ -20,7 +23,9 @@ def decisionTree(dataset):
     fig.set_figheight(10)
     fig.set_figwidth(20)
 
+    # O KFold separa uma unidade do split para teste, no caso, 10% do conjunto
     KFolds = KFold(n_splits=10)
+
     tree = DecisionTreeClassifier() # Modelo CART
     numFolds = 0
     for idxTrain, idxTest in KFolds.split(x, y):
@@ -38,6 +43,8 @@ def decisionTree(dataset):
     plot.legend(legendsList)
     plot.savefig("../results/decisionTree.png")
     plot.show()
+
+    confusionMatrix(confusionList, "CART")
 
     return 
 

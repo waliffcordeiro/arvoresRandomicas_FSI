@@ -39,7 +39,7 @@ def summarizeDataset(dataset):
     # Standard Plot
     dataset.describe().loc['std'].plot.pie(title='Standard deviation', ax = ax12, startangle = 90)
     dataset.describe().loc['std'].plot.bar(title='Standard deviation', ax = ax22)
-    plot.savefig("../results/mean_and_std.png")
+    plot.savefig("../results/dataset_statistics.png")
     plot.show()
 
 

@@ -1,6 +1,7 @@
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import StratifiedKFold as KFold
 import matplotlib.pyplot as plot
+from statistics import mean
 
 from import_data import getData
 from treeTrainData import treeTraining
@@ -13,6 +14,7 @@ def treeExecute(tree, x, y, model):
     aucList = []
     confusionList = []
     legendsList = []
+    featurePerformance = [0]*9
 
     # Plot settings
     fig = plot.figure()
@@ -34,14 +36,14 @@ def treeExecute(tree, x, y, model):
         tree.fit(trainX, trainY)
 
         # Obtendo dados para cada fold e adicionando nas lists
-        aucList, confusionList, legendsList = treeTraining(tree, testX, testY, numFolds, aucList, confusionList, legendsList, model)
+        aucList, confusionList, legendsList, featurePerformance = treeTraining(tree, testX, testY, numFolds, aucList, confusionList, legendsList, featurePerformance, model)
     plot.legend(legendsList)
     plot.savefig("../results/{}.png".format(model))
     plot.show()
 
     confusionMatrix(confusionList, model)
 
-    return 
+    return ([mean(aucList), featurePerformance])
 
 if __name__ == '__main__':
     dataset = getData()

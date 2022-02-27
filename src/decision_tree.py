@@ -7,16 +7,12 @@ from treeTrainData import treeData
 from confusion_matrix import confusionMatrix
 
 
-def decisionTree(dataset):
+def decisionTree(x, y):
 
     # Inicializando lists
     aucList = []
     confusionList = []
     legendsList = []
-
-    # Eliminando a coluna que queremos 'prever'
-    x = dataset.drop("chd", axis=1).values # Axis = 1 para eliminar coluna e não só a linha
-    y = dataset['chd'].values
 
     # Plot settings
     fig = plot.figure()
@@ -39,7 +35,7 @@ def decisionTree(dataset):
         tree.fit(trainX, trainY)
 
         # Obtendo dados para cada fold e adicionando nas lists
-        aucList, confusionList, legendsList = treeData(tree, testX, testY, numFolds, aucList, confusionList, legendsList)
+        aucList, confusionList, legendsList = treeData(tree, testX, testY, numFolds, aucList, confusionList, legendsList, "CART")
     plot.legend(legendsList)
     plot.savefig("../results/decisionTree.png")
     plot.show()
@@ -50,4 +46,9 @@ def decisionTree(dataset):
 
 if __name__ == '__main__':
     dataset = getData()
-    decisionTree(dataset)
+
+    # Eliminando a coluna que queremos 'prever'
+    x = dataset.drop("chd", axis=1).values # Axis = 1 para eliminar coluna e não só a linha
+    y = dataset['chd'].values
+
+    decisionTree(x, y)

@@ -1,7 +1,7 @@
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-from numpy import append, zeros
 from matplotlib import pyplot as plot
+from numpy import zeros
 
 from import_data import getData
 from summarize_data import summarizeDataset
@@ -26,21 +26,26 @@ def main():
     
     results={}
     
+    # Pegando a média AUC e importância das features para cada modelo
     results["CART"] = treeExecute(decisionTree, x, y, "CART")
     results["RandomForest"] = treeExecute(randomForest, x, y, "Random Forest")
     results["RandomForestSQRT"] = treeExecute(randomForestSQRT, x, y, "Random Forest Sqrt")
 
+    # Pegando o nome, média AUC e importância das features do melhor modelo com base na AUC média
     bestResult = compareResults(results)
     print("\n\nO melhor modelo foi {} com a média AUC: {}\n".format(bestResult[0], bestResult[1]))
 
+    # Criando array numpy
     features_size = len(features.columns.values)
     featuresResults = zeros(features_size)
 
+    # Transformando a lista em array numpy para plotar o gráfico
     idx = 0
     for result in bestResult[2]:
         featuresResults[idx] = result
         idx += 1
 
+    # Plotando o gráfico da relevância de cada feature do melhor modelo
     fig = plot.figure()
     fig.set_figheight(10)
     fig.set_figwidth(20)

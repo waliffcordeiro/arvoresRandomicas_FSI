@@ -15,12 +15,15 @@ def main():
 
     # Modelo CART 
     decisionTree = DecisionTreeClassifier()
-    # Random Forest
+    # Random Forest (m=9)
     randomForest = RandomForestClassifier(n_estimators=100)
+    # Random Forest Sqrt (m=3)
+    randomForestSQRT = RandomForestClassifier(n_estimators=100, max_features="sqrt")
     
     
     treeExecute(decisionTree, x, y, "CART")
     treeExecute(randomForest, x, y, "Random Forest")
+    treeExecute(randomForestSQRT, x, y, "Random Forest Sqrt")
     
 
 if __name__ == '__main__':
